@@ -238,6 +238,8 @@ namespace Tools.Maths
             return dAngle;
         }
 
+        #region GetLineIntersection
+
         /// <summary>
         /// Returns the point of intersection for lines spanning each given point pair. 
         /// </summary>
@@ -245,7 +247,7 @@ namespace Tools.Maths
         /// <param name="pntB1">End point of the first line. </param>
         /// <param name="pntA2">Start point of the second line. </param>
         /// <param name="pntB2">End point of the second line. </param>
-        /// <returns></returns>
+        /// <returns>The point of intersection or null, if there is no point of intersection. </returns>
         public static PointF? GetLineIntersection(PointF pntA1, PointF pntB1, PointF pntA2, PointF pntB2)
         {
             float A1 = pntB1.Y - pntA1.Y;
@@ -259,13 +261,42 @@ namespace Tools.Maths
             float delta = A1 * B2 - A2 * B1;
             if (delta == 0)
                 return null; // Lines are parallel. 
-                             //throw new ArgumentException("Lines are parallel");
 
             float x = (B2 * C1 - B1 * C2) / delta;
             float y = (A1 * C2 - A2 * C1) / delta;
 
             return new PointF(x, y);
         }
+
+        /// <summary>
+        /// Returns the point of intersection for lines spanning each given point pair. 
+        /// </summary>
+        /// <param name="pntA1">Start point of the first line. </param>
+        /// <param name="pntB1">End point of the first line. </param>
+        /// <param name="pntA2">Start point of the second line. </param>
+        /// <param name="pntB2">End point of the second line. </param>
+        /// <returns>The point of intersection or null, if there is no point of intersection. </returns>
+        public static PointD? GetLineIntersection(PointD pntA1, PointD pntB1, PointD pntA2, PointD pntB2)
+        {
+            double A1 = pntB1.Y - pntA1.Y;
+            double B1 = pntA1.X - pntB1.X;
+            double C1 = A1 * pntA1.X + B1 * pntA1.Y;
+
+            double A2 = pntB2.Y - pntA2.Y;
+            double B2 = pntA2.X - pntB2.X;
+            double C2 = A2 * pntA2.X + B2 * pntA2.Y;
+
+            double delta = A1 * B2 - A2 * B1;
+            if (delta == 0)
+                return null; // Lines are parallel. 
+
+            double x = (B2 * C1 - B1 * C2) / delta;
+            double y = (A1 * C2 - A2 * C1) / delta;
+
+            return new PointD(x, y);
+        }
+
+        #endregion GetLineIntersection
 
         #endregion Methods
     }

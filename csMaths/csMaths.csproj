@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="src\csMaths.cs" />
     <Compile Include="src\csMatrix.cs" />
+    <Compile Include="src\PointD.cs" />
     <Compile Include="src\csPolygon2.cs" />
     <Compile Include="src\csShape.cs" />
     <Compile Include="src\csVector2.cs" />
