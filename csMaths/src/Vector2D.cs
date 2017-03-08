@@ -2,13 +2,13 @@
 using System.Drawing;
 using System.Diagnostics;
 
-namespace Tools.Maths.Vector2
+namespace Tools.Maths.Geometry
 {
     /// <summary>
     /// Represents a vector in two dimensional space. 
     /// </summary>
     [DebuggerDisplay("X: {X}, Y: {Y}")]
-    public class csVector2
+    public class Vector2D
     {
         /*****************************************************************/
         // Declarations
@@ -36,7 +36,7 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public csVector2(double x, double y)
+        public Vector2D(double x, double y)
         {
             this.X = x;
             this.Y = y;
@@ -45,7 +45,7 @@ namespace Tools.Maths.Vector2
         /// <summary>
         /// Creates a new vector with default values. 
         /// </summary>
-        public csVector2()
+        public Vector2D()
             : this(0, 0)
         {
         }
@@ -55,7 +55,7 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="pntA"></param>
         /// <param name="pntB"></param>
-        public csVector2(Point pntA, Point pntB)
+        public Vector2D(Point pntA, Point pntB)
             : this(pntB.X - pntA.X, pntB.Y - pntA.Y)
         {
         }
@@ -65,7 +65,7 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="pntA"></param>
         /// <param name="pntB"></param>
-        public csVector2(PointF pntA, PointF pntB)
+        public Vector2D(PointF pntA, PointF pntB)
             : this(pntB.X - pntA.X, pntB.Y - pntA.Y)
         {
         }
@@ -74,7 +74,7 @@ namespace Tools.Maths.Vector2
         /// Creates a new vector, based on the given vector. 
         /// </summary>
         /// <param name="vect"></param>
-        public csVector2(csVector2 vect)
+        public Vector2D(Vector2D vect)
             : this(vect.X, vect.Y)
         {
 
@@ -96,7 +96,7 @@ namespace Tools.Maths.Vector2
         /// </remarks>
         /// <param name="vectA">A vector. </param>
         /// <param name="vect">A vector. </param>
-        public double GetDotProduct(csVector2 vect)
+        public double GetDotProduct(Vector2D vect)
         {
             // scalar = (a.x*b.x + a.y*b.y)
             // vectorA * vectorB = a * b cos(alpha)
@@ -116,7 +116,7 @@ namespace Tools.Maths.Vector2
         /// <param name="vectA">A vector. </param>
         /// <param name="vectB">A vector. </param>
         /// <returns></returns>
-        public static double GetDotProduct(csVector2 vectA, csVector2 vectB)
+        public static double GetDotProduct(Vector2D vectA, Vector2D vectB)
         {
             return vectA.GetDotProduct(vectB);
         }
@@ -133,7 +133,7 @@ namespace Tools.Maths.Vector2
         /// Returns the magnitude (absolute length) of the given vector. 
         /// </summary>
         /// <param name="vect">A vector. </param>
-        public static double GetMagnitude(csVector2 vect)
+        public static double GetMagnitude(Vector2D vect)
         {
             return vect.GetMagnitude();
         }
@@ -142,7 +142,7 @@ namespace Tools.Maths.Vector2
         /// Projects this vector onto the given vector and returns the projection. 
         /// </summary>
         /// <param name="vect">A vector to be projected on. </param>
-        public csVector2 Project(csVector2 vect)
+        public Vector2D Project(Vector2D vect)
         {
             // scalar = (a.x*b.x + a.y*b.y)
             // proj.x = ( scalar / (b.x*b.x + b.y*b.y) * b.x );
@@ -152,8 +152,8 @@ namespace Tools.Maths.Vector2
             // proj.x = scalar*b.x;
             // proj.y = scalar*b.y;
 
-            csVector2 vectProjected = new csVector2(0, 0);
-            double dScalar = csVector2.GetDotProduct(this, vect);
+            Vector2D vectProjected = new Vector2D(0, 0);
+            double dScalar = Vector2D.GetDotProduct(this, vect);
 
             //if (bIsUnitVector)
             //{
@@ -175,7 +175,7 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="vectA">A vector to project. </param>
         /// <param name="vectB">A vector to be projected on. </param>
-        public static csVector2 Project(csVector2 vectA, csVector2 vectB)
+        public static Vector2D Project(Vector2D vectA, Vector2D vectB)
         {
             return vectA.Project(vectB);
         }
@@ -185,7 +185,7 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="vect"></param>
         /// <returns></returns>
-        public double GetAngleCos(csVector2 vect)
+        public double GetAngleCos(Vector2D vect)
         {
             // cos alpha = (vectorA*vectorB) / (|vectorA|*|vectorB|)
             // cos alpha = ((a.x*b.x) + (a.y*b.y)) / (Math.sqrt(a.x²+a.y²) * Math.sqrt(b.x²+b.y²))
@@ -198,7 +198,7 @@ namespace Tools.Maths.Vector2
         /// <param name="vectA"></param>
         /// <param name="vectB"></param>
         /// <returns></returns>
-        public static double GetAngleCos(csVector2 vectA, csVector2 vectB)
+        public static double GetAngleCos(Vector2D vectA, Vector2D vectB)
         {
             return vectA.GetAngleCos(vectB);
         }
@@ -208,9 +208,9 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="vect"></param>
         /// <returns></returns>
-        public double GetAngleDeg(csVector2 vect)
+        public double GetAngleDeg(Vector2D vect)
         {
-            return this.GetAngleCos(vect) / csMaths.DEG_TO_RAD;
+            return this.GetAngleCos(vect) / CSharpMaths.DEG_TO_RAD;
         }
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace Tools.Maths.Vector2
         /// <param name="vectA"></param>
         /// <param name="vectB"></param>
         /// <returns></returns>
-        public static double GetAngleDeg(csVector2 vectA, csVector2 vectB)
+        public static double GetAngleDeg(Vector2D vectA, Vector2D vectB)
         {
             return vectA.GetAngleDeg(vectB);
         }
@@ -228,20 +228,20 @@ namespace Tools.Maths.Vector2
         /// Returns a normalized (unit length) vector, based on this vector. 
         /// </summary>
         /// <returns></returns>
-        public csVector2 GetNormalized()
+        public Vector2D GetNormalized()
         {
             // 1. Get vector magnitude. 
             // 2. Divide each of its components (xy) or (xyz) by the magnitude. 
             double dMagnitude = this.GetMagnitude();
 
-            return new csVector2(this.X / dMagnitude, this.Y / dMagnitude);
+            return new Vector2D(this.X / dMagnitude, this.Y / dMagnitude);
         }
 
         /// <summary>
         /// Returns a normalized (unit length) vector, based on the given vector. 
         /// </summary>
         /// <returns></returns>
-        public static csVector2 GetNormalized(csVector2 vect)
+        public static Vector2D GetNormalized(Vector2D vect)
         {
             return vect.GetNormalized();
         }
@@ -251,9 +251,9 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="dFactor"></param>
         /// <returns></returns>
-        public csVector2 GetScaled(double dFactor)
+        public Vector2D GetScaled(double dFactor)
         {
-            return new csVector2(this.X * dFactor, this.Y * dFactor);
+            return new Vector2D(this.X * dFactor, this.Y * dFactor);
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="dFactor"></param>
         /// <returns></returns>
-        public static csVector2 GetScaled(csVector2 vect, double dFactor)
+        public static Vector2D GetScaled(Vector2D vect, double dFactor)
         {
             return vect.GetScaled(dFactor);
         }
@@ -271,14 +271,14 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="dAngle">An angle, in degrees. </param>
         /// <returns></returns>
-        public csVector2 GetRotated(double dAngle)
+        public Vector2D GetRotated(double dAngle)
         {
             //(x cos alpha + y sin alpha, -x sin alpha + y cos alpha)
-            double dAngleRad = csMaths.GetAngleRad(dAngle);
+            double dAngleRad = CSharpMaths.GetAngleRad(dAngle);
             double cos = Math.Cos(dAngleRad);
             double sin = Math.Sin(dAngleRad);
 
-            return new csVector2((this.X * cos) + (this.Y * sin), (-this.X * sin) + (this.Y * cos));
+            return new Vector2D((this.X * cos) + (this.Y * sin), (-this.X * sin) + (this.Y * cos));
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Tools.Maths.Vector2
         /// </summary>
         /// <param name="dAngle">An angle, in degrees. </param>
         /// <returns></returns>
-        public static csVector2 GetRotated(csVector2 vect, double dAngle)
+        public static Vector2D GetRotated(Vector2D vect, double dAngle)
         {
             return vect.GetRotated(dAngle);
         }
@@ -296,9 +296,9 @@ namespace Tools.Maths.Vector2
         /// The returned vector can be considered rotated counter-clockwise by 90 degrees. 
         /// </summary>
         /// <returns></returns>
-        public csVector2 GetPerpendicular()
+        public Vector2D GetPerpendicular()
         {
-            return new csVector2(-this.Y, this.X);
+            return new Vector2D(-this.Y, this.X);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace Tools.Maths.Vector2
         /// The returned vector can be considered rotated counter-clockwise by 90 degrees. 
         /// </summary>
         /// <returns></returns>
-        public static csVector2 GetPerpendicular(csVector2 vect)
+        public static Vector2D GetPerpendicular(Vector2D vect)
         {
             return vect.GetPerpendicular();
         }
@@ -317,64 +317,64 @@ namespace Tools.Maths.Vector2
         /*****************************************************************/
         #region Operators
 
-        public static csVector2 operator +(csVector2 vectA, csVector2 vectB)
+        public static Vector2D operator +(Vector2D vectA, Vector2D vectB)
         {
-            return new csVector2(vectA.X + vectB.X, vectA.Y + vectB.Y);
+            return new Vector2D(vectA.X + vectB.X, vectA.Y + vectB.Y);
         }
 
-        public static csVector2 operator +(csVector2 vect, Point pnt)
+        public static Vector2D operator +(Vector2D vect, Point pnt)
         {
-            return new csVector2(vect.X + pnt.X, vect.Y + pnt.Y);
+            return new Vector2D(vect.X + pnt.X, vect.Y + pnt.Y);
         }
 
-        public static csVector2 operator +(csVector2 vect, PointF pnt)
+        public static Vector2D operator +(Vector2D vect, PointF pnt)
         {
-            return new csVector2(vect.X + pnt.X, vect.Y + pnt.Y);
+            return new Vector2D(vect.X + pnt.X, vect.Y + pnt.Y);
         }
 
-        public static csVector2 operator -(csVector2 vectA, csVector2 vectB)
+        public static Vector2D operator -(Vector2D vectA, Vector2D vectB)
         {
-            return new csVector2(vectA.X - vectB.X, vectA.Y - vectB.Y);
+            return new Vector2D(vectA.X - vectB.X, vectA.Y - vectB.Y);
         }
 
-        public static csVector2 operator -(csVector2 vect, Point pnt)
+        public static Vector2D operator -(Vector2D vect, Point pnt)
         {
-            return new csVector2(vect.X - pnt.X, vect.Y - pnt.Y);
+            return new Vector2D(vect.X - pnt.X, vect.Y - pnt.Y);
         }
 
-        public static csVector2 operator -(csVector2 vect, PointF pnt)
+        public static Vector2D operator -(Vector2D vect, PointF pnt)
         {
-            return new csVector2(vect.X - pnt.X, vect.Y - pnt.Y);
+            return new Vector2D(vect.X - pnt.X, vect.Y - pnt.Y);
         }
 
-        public static csVector2 operator *(csVector2 vectA, csVector2 vectB)
+        public static Vector2D operator *(Vector2D vectA, Vector2D vectB)
         {
-            return new csVector2(vectA.X * vectB.X, vectA.Y * vectB.Y);
+            return new Vector2D(vectA.X * vectB.X, vectA.Y * vectB.Y);
         }
 
-        public static csVector2 operator *(csVector2 vect, Point pnt)
+        public static Vector2D operator *(Vector2D vect, Point pnt)
         {
-            return new csVector2(vect.X * pnt.X, vect.Y * pnt.Y);
+            return new Vector2D(vect.X * pnt.X, vect.Y * pnt.Y);
         }
 
-        public static csVector2 operator *(csVector2 vect, PointF pnt)
+        public static Vector2D operator *(Vector2D vect, PointF pnt)
         {
-            return new csVector2(vect.X * pnt.X, vect.Y * pnt.Y);
+            return new Vector2D(vect.X * pnt.X, vect.Y * pnt.Y);
         }
 
-        public static csVector2 operator /(csVector2 vectA, csVector2 vectB)
+        public static Vector2D operator /(Vector2D vectA, Vector2D vectB)
         {
-            return new csVector2(vectA.X / vectB.X, vectA.Y / vectB.Y);
+            return new Vector2D(vectA.X / vectB.X, vectA.Y / vectB.Y);
         }
 
-        public static csVector2 operator /(csVector2 vect, Point pnt)
+        public static Vector2D operator /(Vector2D vect, Point pnt)
         {
-            return new csVector2(vect.X / pnt.X, vect.Y / pnt.Y);
+            return new Vector2D(vect.X / pnt.X, vect.Y / pnt.Y);
         }
 
-        public static csVector2 operator /(csVector2 vect, PointF pnt)
+        public static Vector2D operator /(Vector2D vect, PointF pnt)
         {
-            return new csVector2(vect.X / pnt.X, vect.Y / pnt.Y);
+            return new Vector2D(vect.X / pnt.X, vect.Y / pnt.Y);
         }
 
         #endregion Operators

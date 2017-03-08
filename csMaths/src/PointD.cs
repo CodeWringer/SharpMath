@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime;
 
-namespace Tools.Maths
+namespace Tools.Maths.Geometry
 {
     /// <summary>
     /// Represents an ordered pair of double x- and y-coordinates that defines a point in a two-dimensional plane.

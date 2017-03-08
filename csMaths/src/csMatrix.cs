@@ -81,12 +81,12 @@ namespace Tools.Maths.Matrix
         /// <returns></returns>
         public csMatrix GetRotated(double angle)
         {
-            angle = angle % csMaths.DEG_CIRCLE;
+            angle = angle % CSharpMaths.DEG_CIRCLE;
 
             if (angle < 0)
-                angle = csMaths.DEG_CIRCLE + angle;
+                angle = CSharpMaths.DEG_CIRCLE + angle;
 
-            angle = angle * csMaths.DEG_TO_RAD;
+            angle = angle * CSharpMaths.DEG_TO_RAD;
 
             double cos = Math.Cos(angle);
             double sin = Math.Sin(angle);

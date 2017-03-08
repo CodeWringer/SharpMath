@@ -1,9 +1,7 @@
 ﻿using System.Drawing;
 using System.Diagnostics;
 
-using Tools.Maths.Vector2;
-
-namespace Tools.Maths.VectorAngled2
+namespace Tools.Maths.Geometry
 {
     /// <summary>
     /// Represents a vector with a direction (angle). 
@@ -14,7 +12,7 @@ namespace Tools.Maths.VectorAngled2
     /// Date: 
     /// </remarks>
     [DebuggerDisplay("X: {X}, Y: {Y}, dRotation: {dRotation}")]
-    public class csVectorAngled2
+    public class VectorAngled2D
     {
         /*****************************************************************/
         // Declarations
@@ -57,7 +55,7 @@ namespace Tools.Maths.VectorAngled2
             get { return this._dRotation; }
             set
             {
-                this._dRotation = csMaths.GetAngleClamped(value);
+                this._dRotation = CSharpMaths.GetAngleClamped(value);
 
                 if (this._dRotation > this.dMaximum)
                     this._dRotation = this.dMaximum;
@@ -75,7 +73,7 @@ namespace Tools.Maths.VectorAngled2
         public double dMinimum
         {
             get { return this._dMinimum; }
-            set { this._dMinimum = csMaths.GetAngleClamped(value); }
+            set { this._dMinimum = CSharpMaths.GetAngleClamped(value); }
         }
 
         private double _dMaximum;
@@ -85,18 +83,18 @@ namespace Tools.Maths.VectorAngled2
         public double dMaximum
         {
             get { return this._dMaximum; }
-            set { this._dMaximum = csMaths.GetAngleClamped(value); }
+            set { this._dMaximum = CSharpMaths.GetAngleClamped(value); }
         }
 
         /// <summary>
         /// A default orientation vector. 
         /// </summary>
-        private Vector2.csVector2 _vectDefault;
+        private Vector2D _vectDefault;
 
         /// <summary>
         /// Underlying, rotated vector. 
         /// </summary>
-        private Vector2.csVector2 _vect;
+        private Vector2D _vect;
 
         /// <summary>
         /// Point of origin in world space. 
@@ -116,20 +114,20 @@ namespace Tools.Maths.VectorAngled2
         /// <param name="dMinimum">Minimum allowed angle for the vector. </param>
         /// <param name="dMaximum">Maximum allowed angle for the vector. </param>
         /// <param name="pntOrigin">Point of origin in world space. </param>
-        public csVectorAngled2(double dMinimum, double dMaximum, double dLength, PointF pntOrigin)
+        public VectorAngled2D(double dMinimum, double dMaximum, double dLength, PointF pntOrigin)
         {
             this.dMinimum = dMinimum;
             this.dMaximum = dMaximum;
-            this._vect = new Vector2.csVector2(dLength, 0);
-            this._vectDefault = new Vector2.csVector2(dLength, 0);
+            this._vect = new Vector2D(dLength, 0);
+            this._vectDefault = new Vector2D(dLength, 0);
             this.pntOrigin = pntOrigin; 
         }
 
         /// <summary>
         /// Creates a new angled vector, with default values. 
         /// </summary>
-        public csVectorAngled2()
-            : this(0, csMaths.DEG_CIRCLE, 1, new PointF())
+        public VectorAngled2D()
+            : this(0, CSharpMaths.DEG_CIRCLE, 1, new PointF())
         {
         }
 
@@ -139,10 +137,10 @@ namespace Tools.Maths.VectorAngled2
         /// </summary>
         /// <param name="dAngle">A starting angle for the vector. </param>
         /// <param name="dRange">A degrees range the vector is allowed to rotate, from its starting angle. </param>
-        public csVectorAngled2(double dAngle, double dRange)
+        public VectorAngled2D(double dAngle, double dRange)
         {
-            this._vect = new Vector2.csVector2(1, 0);
-            this._vectDefault = new Vector2.csVector2(1, 0);
+            this._vect = new Vector2D(1, 0);
+            this._vectDefault = new Vector2D(1, 0);
 
             double dMinimum = dAngle - (dRange / 2);
             double dMaximum = dAngle + (dRange / 2);
@@ -151,10 +149,10 @@ namespace Tools.Maths.VectorAngled2
                 dMinimum = 0;
 
             //if (dMaximum > csMaths.DEG_CIRCLE)
-                dMaximum = csMaths.DEG_CIRCLE;
+                dMaximum = CSharpMaths.DEG_CIRCLE;
 
-            this.dMinimum = csMaths.GetAngleClamped(dMinimum);
-            this.dMaximum = csMaths.GetAngleClamped(dMaximum);
+            this.dMinimum = CSharpMaths.GetAngleClamped(dMinimum);
+            this.dMaximum = CSharpMaths.GetAngleClamped(dMaximum);
             this.dRotation = dAngle;
         }
 
@@ -163,8 +161,8 @@ namespace Tools.Maths.VectorAngled2
         /// </summary>
         /// <param name="dLength"></param>
         /// <param name="pntOrigin"></param>
-        public csVectorAngled2(double dLength, PointF pntOrigin)
-            : this(0, csMaths.DEG_CIRCLE, dLength, pntOrigin)
+        public VectorAngled2D(double dLength, PointF pntOrigin)
+            : this(0, CSharpMaths.DEG_CIRCLE, dLength, pntOrigin)
         {
         }
 
@@ -178,9 +176,9 @@ namespace Tools.Maths.VectorAngled2
         /// Returns a new Vector2D, based on this angled vector. 
         /// </summary>
         /// <returns></returns>
-        public csVector2 ToVector2D()
+        public Vector2D ToVector2D()
         {
-            return new csVector2(this.X, this.Y);
+            return new Vector2D(this.X, this.Y);
         }
 
         #endregion Methods

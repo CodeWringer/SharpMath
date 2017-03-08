@@ -1,31 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Drawing;
 
-using Tools.Maths.Vector2;
-
-namespace Tools.Maths.Polygon2
+namespace Tools.Maths.Geometry
 {
     /// <summary>
     /// Represents a polygon in two dimensional space. 
     /// </summary>
-    /// <remarks>
-    /// Version: 1.0.0.0
-    /// Date: 28.12.2016
-    /// </remarks>
-    public class csPolygon2
+    public class Polygon2D
     {
         /*****************************************************************/
         // Declarations
         /*****************************************************************/
         #region Declarations
 
-        private List<Vector2.csVector2> _points;
+        private List<Vector2D> _points;
         /// <summary>
         /// Getter for the list of points. 
         /// </summary>
-        public List<Vector2.csVector2> Points
+        public List<Vector2D> Points
         {
             get { return this._points; }
             private set { this._points = value; }
@@ -34,7 +26,7 @@ namespace Tools.Maths.Polygon2
         /// <summary>
         /// A vector representing the center point of the polygon. 
         /// </summary>
-        public csVector2 vectCenter
+        public Vector2D vectCenter
         {
             get
             {
@@ -47,7 +39,7 @@ namespace Tools.Maths.Polygon2
                     totalY += this._points[i].Y;
                 }
 
-                return new Vector2.csVector2(totalX / (float)this._points.Count, totalY / (float)this._points.Count);
+                return new Vector2D(totalX / (float)this._points.Count, totalY / (float)this._points.Count);
             }
         }
 
@@ -57,14 +49,14 @@ namespace Tools.Maths.Polygon2
         /*****************************************************************/
         #region Constructors
 
-        public csPolygon2()
+        public Polygon2D()
         {
-            this._points = new List<Vector2.csVector2>();
+            this._points = new List<Vector2D>();
         }
 
-        public csPolygon2(IEnumerable<Vector2.csVector2> points)
+        public Polygon2D(IEnumerable<Vector2D> points)
         {
-            this._points = new List<Vector2.csVector2>(points);
+            this._points = new List<Vector2D>(points);
         }
 
         #endregion Constructors
@@ -77,7 +69,7 @@ namespace Tools.Maths.Polygon2
         /// Returns the interval of this polygon projected onto the given axis. 
         /// </summary>
         /// <param name="vectAxis">The axis to project the polygon onto. </param>
-        public Interval Project(Vector2.csVector2 vectAxis)
+        public Interval Project(Vector2D vectAxis)
         {
             // Initialize with the first point in the list of points. 
             float d = (float)vectAxis.GetDotProduct(this.Points[0]); // To project a point on an axis use the dot product. 
@@ -107,7 +99,7 @@ namespace Tools.Maths.Polygon2
         /// <param name="polygonA">A polygon to check. </param>
         /// <param name="polygonB">A polygon to check against. </param>
         /// <returns></returns>
-        public static PolygonCollisionResult PolygonCollision(csPolygon2 polygonA, csPolygon2 polygonB)
+        public static PolygonCollisionResult PolygonCollision(Polygon2D polygonA, Polygon2D polygonB)
         {
             return polygonA.PolygonCollision(polygonB);
         }
@@ -117,7 +109,7 @@ namespace Tools.Maths.Polygon2
         /// </summary>
         /// <param name="polygon">A polygon to check against. </param>
         /// <returns></returns>
-        public PolygonCollisionResult PolygonCollision(csPolygon2 polygon)
+        public PolygonCollisionResult PolygonCollision(Polygon2D polygon)
         {
             PolygonCollisionResult result = new PolygonCollisionResult();
 
@@ -131,8 +123,8 @@ namespace Tools.Maths.Polygon2
 
             //float minIntervalDistance = float.PositiveInfinity;
 
-            Vector2.csVector2 vectAxisTranslation = new Vector2.csVector2();
-            Vector2.csVector2 vectEdge;
+            Vector2D vectAxisTranslation = new Vector2D();
+            Vector2D vectEdge;
 
             // Loop through all the edges of both polygons
             for (int edgeIndex = 0; edgeIndex < edgeCountA + edgeCountB; edgeIndex++)
@@ -163,7 +155,7 @@ namespace Tools.Maths.Polygon2
                 // ===== 1. Find if the polygons are currently intersecting =====
 
                 // Find the axis perpendicular to the current edge
-                Vector2.csVector2 vectAxis = new Vector2.csVector2(-vectEdge.Y, vectEdge.X);
+                Vector2D vectAxis = new Vector2D(-vectEdge.Y, vectEdge.X);
                 vectAxis = vectAxis.GetNormalized();
 
                 // Find the projection of the polygon on the current axis
@@ -227,7 +219,7 @@ namespace Tools.Maths.Polygon2
         /// Applies a translation to every point of the polygon, based on the given vector. 
         /// </summary>
         /// <param name="vect"></param>
-        public void Translate(Vector2.csVector2 vect)
+        public void Translate(Vector2D vect)
         {
             Translate(vect.X, vect.Y);
         }
@@ -241,8 +233,8 @@ namespace Tools.Maths.Polygon2
         {
             for (int i = 0; i < this._points.Count; i++)
             {
-                Vector2.csVector2 p = this._points[i];
-                this._points[i] = new Vector2.csVector2(p.X + x, p.Y + y);
+                Vector2D p = this._points[i];
+                this._points[i] = new Vector2D(p.X + x, p.Y + y);
             }
         }
 
@@ -252,14 +244,14 @@ namespace Tools.Maths.Polygon2
         /// <param name="pointScale">The point to scale around. </param>
         /// <param name="dFactor">The factor to scale by. </param>
         /// <returns></returns>
-        public csPolygon2 GetScaled(Vector2.csVector2 pointScale, double dFactor)
+        public Polygon2D GetScaled(Vector2D pointScale, double dFactor)
         {
-            csPolygon2 polygonResult = new csPolygon2();
+            Polygon2D polygonResult = new Polygon2D();
 
-            foreach (Vector2.csVector2 point in this.Points)
+            foreach (Vector2D point in this.Points)
             {
-                Vector2.csVector2 vectDistance = pointScale - point;
-                polygonResult.Points.Add(new Vector2.csVector2(point + vectDistance.GetScaled(dFactor)));
+                Vector2D vectDistance = pointScale - point;
+                polygonResult.Points.Add(new Vector2D(point + vectDistance.GetScaled(dFactor)));
             }
 
             return polygonResult;
@@ -271,11 +263,11 @@ namespace Tools.Maths.Polygon2
         /// <param name="reflectX">If true, the polygon will be reflected along the x-axis. </param>
         /// <param name="reflectY">If true, the polygon will be reflected along the y-axis. </param>
         /// <returns></returns>
-        public csPolygon2 GetReflected(bool reflectX, bool reflectY)
+        public Polygon2D GetReflected(bool reflectX, bool reflectY)
         {
-            csPolygon2 polygonResult = new csPolygon2();
+            Polygon2D polygonResult = new Polygon2D();
 
-            foreach (Vector2.csVector2 point in this.Points)
+            foreach (Vector2D point in this.Points)
             {
                 double resultX = point.X;
                 double resultY = point.Y;
@@ -285,7 +277,7 @@ namespace Tools.Maths.Polygon2
                 if (reflectY)
                     resultY = -resultY;
 
-                polygonResult.Points.Add(new Vector2.csVector2(resultX, resultY));
+                polygonResult.Points.Add(new Vector2D(resultX, resultY));
             }
 
             return polygonResult;
@@ -298,18 +290,18 @@ namespace Tools.Maths.Polygon2
         /// <param name="polygon">A polygon, in the form of an array of points. </param>
         /// <returns></returns>
         /// <see cref="http://csharphelper.com/blog/2014/07/determine-whether-a-point-is-inside-a-polygon-in-c/"/>
-        public bool Contains(Vector2.csVector2 point)
+        public bool Contains(Vector2D point)
         {
             // Get the angle between the point and the
             // first and last vertices.
             int max_point = this._points.Count - 1;
-            double total_angle = csMaths.GetAngle(this._points[max_point], point, this._points[0]);
+            double total_angle = CSharpMaths.GetAngle(this._points[max_point], point, this._points[0]);
 
             // Add the angles from the point
             // to each other pair of vertices.
             for (int i = 0; i < max_point; i++)
             {
-                total_angle += csMaths.GetAngle(this._points[i], point, this._points[i + 1]);
+                total_angle += CSharpMaths.GetAngle(this._points[i], point, this._points[i + 1]);
             }
 
             // The total angle should be 2 * PI or -2 * PI if
@@ -336,7 +328,7 @@ namespace Tools.Maths.Polygon2
         public bool Intersect;
 
         // The translation to apply to the first polygon to push the polygons apart.
-        public Vector2.csVector2 MinimumTranslationVector;
+        public Vector2D MinimumTranslationVector;
     }
 
     /// <summary>

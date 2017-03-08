@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
-
-using Tools.Maths.Vector2;
+using Tools.Maths.Geometry;
 
 namespace Tools.Maths
 {
@@ -9,9 +8,9 @@ namespace Tools.Maths
     /// Contains various methods for performing mathematical operations. 
     /// </summary>
     /// <remarks>
-    /// Date: 16.02.2017
+    /// Date: 06.03.2017
     /// </remarks>
-    public static class csMaths
+    public static class CSharpMaths
     {
         /*****************************************************************/
         // Declarations
@@ -74,7 +73,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static PointF GetPointOnCircle(PointF pntCircleOrigin, double dRadius, PointF pntTarget, double dAngleRadian)
         {
-            Vector2.csVector2 vectScaled = new Vector2.csVector2(pntCircleOrigin, pntTarget);
+            Vector2D vectScaled = new Vector2D(pntCircleOrigin, pntTarget);
             vectScaled = vectScaled.GetNormalized();
             vectScaled = vectScaled.GetScaled(dRadius);
 
@@ -91,8 +90,8 @@ namespace Tools.Maths
         /// <returns></returns>
         public static PointF GetRandomPointInCircle(double radius)
         {
-            double radian = csMaths.GetRandomDouble(0, Math.PI * 2);
-            double distance = csMaths.GetRandomDouble(0, radius);
+            double radian = CSharpMaths.GetRandomDouble(0, Math.PI * 2);
+            double distance = CSharpMaths.GetRandomDouble(0, radius);
 
             return new PointF((float)(distance * Math.Cos(radian)), (float)(distance * Math.Sin(radian)));
         }
@@ -104,7 +103,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetAngleDeg(double dAngleRadian)
         {
-            return (dAngleRadian * csMaths.RAD_TO_DEG);
+            return (dAngleRadian * CSharpMaths.RAD_TO_DEG);
         }
 
         /// <summary>
@@ -114,7 +113,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetAngleRad(double dAngleDegree)
         {
-            return dAngleDegree * csMaths.DEG_TO_RAD;
+            return dAngleDegree * CSharpMaths.DEG_TO_RAD;
         }
 
         /// <summary>
@@ -151,7 +150,7 @@ namespace Tools.Maths
         /// <param name="pntC"></param>
         /// <returns></returns>
         /// <see cref="http://csharphelper.com/blog/2014/07/determine-whether-a-point-is-inside-a-polygon-in-c/"/>
-        public static double GetAngle(Vector2.csVector2 pntA, Vector2.csVector2 pntB, Vector2.csVector2 pntC)
+        public static double GetAngle(Vector2D pntA, Vector2D pntB, Vector2D pntC)
         {
             // Get the dot product...
             // Get the vectors' coordinates.
@@ -185,7 +184,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static int GetRandomInt(int min, int max)
         {
-            return csMaths.rnd.Next(min, max);
+            return CSharpMaths.rnd.Next(min, max);
         }
 
         /// <summary>
@@ -196,7 +195,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetRandomDouble(double min, double max)
         {
-            return csMaths.rnd.NextDouble() * (max - min) + min;
+            return CSharpMaths.rnd.NextDouble() * (max - min) + min;
         }
 
         /// <summary>
@@ -214,7 +213,7 @@ namespace Tools.Maths
             }
             else
             {
-                Vector2.csVector2 vect = new Vector2.csVector2(pntA, pntB);
+                Vector2D vect = new Vector2D(pntA, pntB);
                 return vect.GetMagnitude();
             }
         }
@@ -226,13 +225,13 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetAngleClamped(double dAngle)
         {
-            if (dAngle > csMaths.DEG_CIRCLE)
+            if (dAngle > CSharpMaths.DEG_CIRCLE)
             {
-                dAngle = dAngle % csMaths.DEG_CIRCLE;
+                dAngle = dAngle % CSharpMaths.DEG_CIRCLE;
             }
             else if (dAngle < 0)
             {
-                dAngle = csMaths.DEG_CIRCLE + (dAngle % csMaths.DEG_CIRCLE);
+                dAngle = CSharpMaths.DEG_CIRCLE + (dAngle % CSharpMaths.DEG_CIRCLE);
             }
 
             return dAngle;

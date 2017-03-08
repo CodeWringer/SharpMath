@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tools.Maths</RootNamespace>
-    <AssemblyName>csMaths</AssemblyName>
+    <AssemblyName>CSharpMaths</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -81,15 +81,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\csMaths.cs" />
+    <Compile Include="src\CSharpMaths.cs" />
     <Compile Include="src\csMatrix.cs" />
     <Compile Include="src\PointD.cs" />
-    <Compile Include="src\csPolygon2.cs" />
-    <Compile Include="src\csShape.cs" />
-    <Compile Include="src\csVector2.cs" />
-    <Compile Include="src\csVectorAngled2.cs" />
+    <Compile Include="src\Polygon2D.cs" />
+    <Compile Include="src\Shape.cs" />
+    <Compile Include="src\Vector2D.cs" />
+    <Compile Include="src\VectorAngled2D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\csPoint3.cs" />
+    <Compile Include="src\Point3.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

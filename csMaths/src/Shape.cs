@@ -1,16 +1,17 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Diagnostics;
 
 using Tools.Maths.Matrix;
-using Tools.Maths.Vector2;
 
-namespace Tools.Maths
+namespace Tools.Maths.Geometry
 {
     /// <summary>
     /// Represents a transformable shape. 
     /// </summary>
     [DebuggerDisplay("pntOrigin.X: {pntOrigin.X}, pntOrigin.Y: {pntOrigin.Y}")]
-    public class csShape
+    [Obsolete("Will be phased out along with the \"Matrix\" class. ")]
+    public class Shape
     {
         /*****************************************************************/
         // Declarations
@@ -52,7 +53,7 @@ namespace Tools.Maths
             }
             set
             {
-                this._dRotation = csMaths.GetAngleClamped(value);
+                this._dRotation = CSharpMaths.GetAngleClamped(value);
                 
                 this.vectFront = this._vectDefault.GetRotated(-this._dRotation);
                 this.vectRight = this.vectFront.GetPerpendicular();
@@ -63,7 +64,7 @@ namespace Tools.Maths
         /// <summary>
         /// A vector facing in the direction of the rotation angle. 
         /// </summary>
-        public csVector2 vectFront
+        public Vector2D vectFront
         {
             get;
             private set;
@@ -72,7 +73,7 @@ namespace Tools.Maths
         /// <summary>
         /// A vector perpendicular to the front facing vector. 
         /// </summary>
-        public csVector2 vectRight
+        public Vector2D vectRight
         {
             get;
             private set;
@@ -81,7 +82,7 @@ namespace Tools.Maths
         /// <summary>
         /// A default orientation vector. 
         /// </summary>
-        private csVector2 _vectDefault;
+        private Vector2D _vectDefault;
 
         #endregion Declarations
         /*****************************************************************/
@@ -89,12 +90,12 @@ namespace Tools.Maths
         /*****************************************************************/
         #region Constructors
 
-        public csShape(double[,] matrix, PointF pntOffset)
+        public Shape(double[,] matrix, PointF pntOffset)
         {
             this.pntOrigin = pntOffset;
             this.mxShape = new csMatrix(matrix);
             this.mxTransformed = new csMatrix(matrix);
-            this._vectDefault = new Vector2.csVector2(0, -10);
+            this._vectDefault = new Vector2D(0, -10);
             this.dRotation = 0;
         }
 
