@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Diagnostics;
 
-namespace Tools.Maths.Geometry
+namespace Tools.Math.Geometry
 {
     /// <summary>
     /// Represents a vector in two dimensional space. 
@@ -126,7 +126,7 @@ namespace Tools.Maths.Geometry
         /// </summary>
         public double GetMagnitude()
         {
-            return (Math.Sqrt((this.X * this.X) + (this.Y * this.Y)));
+            return (System.Math.Sqrt((this.X * this.X) + (this.Y * this.Y)));
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace Tools.Maths.Geometry
         /// <returns></returns>
         public double GetAngleDeg(Vector2D vect)
         {
-            return this.GetAngleCos(vect) / CSharpMaths.DEG_TO_RAD;
+            return this.GetAngleCos(vect) / SharpMath.DEG_TO_RAD;
         }
 
         /// <summary>
@@ -274,9 +274,9 @@ namespace Tools.Maths.Geometry
         public Vector2D GetRotated(double dAngle)
         {
             //(x cos alpha + y sin alpha, -x sin alpha + y cos alpha)
-            double dAngleRad = CSharpMaths.GetAngleRad(dAngle);
-            double cos = Math.Cos(dAngleRad);
-            double sin = Math.Sin(dAngleRad);
+            double dAngleRad = SharpMath.GetAngleRad(dAngle);
+            double cos = System.Math.Cos(dAngleRad);
+            double sin = System.Math.Sin(dAngleRad);
 
             return new Vector2D((this.X * cos) + (this.Y * sin), (-this.X * sin) + (this.Y * cos));
         }

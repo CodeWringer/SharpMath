@@ -2,9 +2,9 @@
 using System.Drawing;
 using System.Diagnostics;
 
-using Tools.Maths.Matrix;
+using Tools.Math.Matrix;
 
-namespace Tools.Maths.Geometry
+namespace Tools.Math.Geometry
 {
     /// <summary>
     /// Represents a transformable shape. 
@@ -53,7 +53,7 @@ namespace Tools.Maths.Geometry
             }
             set
             {
-                this._dRotation = CSharpMaths.GetAngleClamped(value);
+                this._dRotation = SharpMath.GetAngleClamped(value);
                 
                 this.vectFront = this._vectDefault.GetRotated(-this._dRotation);
                 this.vectRight = this.vectFront.GetPerpendicular();

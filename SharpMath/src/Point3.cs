@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Tools.Maths.Geometry
+namespace Tools.Math.Geometry
 {
     /// <summary>
     /// Represents a collection of three coordinates, for use in three dimensional space. 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using Tools.Maths.Geometry;
+using Tools.Math.Geometry;
 
-namespace Tools.Maths
+namespace Tools.Math
 {
     /// <summary>
     /// Contains various methods for performing mathematical operations. 
@@ -10,7 +10,7 @@ namespace Tools.Maths
     /// <remarks>
     /// Date: 06.03.2017
     /// </remarks>
-    public static class CSharpMaths
+    public static class SharpMath
     {
         /*****************************************************************/
         // Declarations
@@ -54,8 +54,8 @@ namespace Tools.Maths
         public static PointF GetPointOnCircle(PointF pntCircleOrigin, double dRadius, double dAngleRadian)
         {
             return new PointF(
-                (float)(pntCircleOrigin.Y + dRadius * Math.Sin(dAngleRadian)),
-                (float)(pntCircleOrigin.X + dRadius * Math.Cos(dAngleRadian))
+                (float)(pntCircleOrigin.Y + dRadius * System.Math.Sin(dAngleRadian)),
+                (float)(pntCircleOrigin.X + dRadius * System.Math.Cos(dAngleRadian))
             );
         }
 
@@ -90,10 +90,10 @@ namespace Tools.Maths
         /// <returns></returns>
         public static PointF GetRandomPointInCircle(double radius)
         {
-            double radian = CSharpMaths.GetRandomDouble(0, Math.PI * 2);
-            double distance = CSharpMaths.GetRandomDouble(0, radius);
+            double radian = SharpMath.GetRandomDouble(0, System.Math.PI * 2);
+            double distance = SharpMath.GetRandomDouble(0, radius);
 
-            return new PointF((float)(distance * Math.Cos(radian)), (float)(distance * Math.Sin(radian)));
+            return new PointF((float)(distance * System.Math.Cos(radian)), (float)(distance * System.Math.Sin(radian)));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetAngleDeg(double dAngleRadian)
         {
-            return (dAngleRadian * CSharpMaths.RAD_TO_DEG);
+            return (dAngleRadian * SharpMath.RAD_TO_DEG);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetAngleRad(double dAngleDegree)
         {
-            return dAngleDegree * CSharpMaths.DEG_TO_RAD;
+            return dAngleDegree * SharpMath.DEG_TO_RAD;
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Tools.Maths
         {
             // pointA = origin
             // pointB = target
-            return (Math.Atan2((pntB.Y - pntA.Y), (pntB.X - pntA.X)));
+            return (System.Math.Atan2((pntB.Y - pntA.Y), (pntB.X - pntA.X)));
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Tools.Maths
         {
             // pointA = origin
             // pointB = target
-            return (Math.Atan2((pntB.Y - pntA.Y), (pntB.X - pntA.X)) * (180 / Math.PI));
+            return (System.Math.Atan2((pntB.Y - pntA.Y), (pntB.X - pntA.X)) * (180 / System.Math.PI));
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Tools.Maths
             double cross_product = (BAx * BCy - BAy * BCx);
 
             // Calculate the angle.
-            return Math.Atan2(cross_product, dot_product);
+            return System.Math.Atan2(cross_product, dot_product);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static int GetRandomInt(int min, int max)
         {
-            return CSharpMaths.rnd.Next(min, max);
+            return SharpMath.rnd.Next(min, max);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetRandomDouble(double min, double max)
         {
-            return CSharpMaths.rnd.NextDouble() * (max - min) + min;
+            return SharpMath.rnd.NextDouble() * (max - min) + min;
         }
 
         /// <summary>
@@ -225,13 +225,13 @@ namespace Tools.Maths
         /// <returns></returns>
         public static double GetAngleClamped(double dAngle)
         {
-            if (dAngle > CSharpMaths.DEG_CIRCLE)
+            if (dAngle > SharpMath.DEG_CIRCLE)
             {
-                dAngle = dAngle % CSharpMaths.DEG_CIRCLE;
+                dAngle = dAngle % SharpMath.DEG_CIRCLE;
             }
             else if (dAngle < 0)
             {
-                dAngle = CSharpMaths.DEG_CIRCLE + (dAngle % CSharpMaths.DEG_CIRCLE);
+                dAngle = SharpMath.DEG_CIRCLE + (dAngle % SharpMath.DEG_CIRCLE);
             }
 
             return dAngle;

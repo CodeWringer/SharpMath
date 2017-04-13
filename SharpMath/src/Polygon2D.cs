@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tools.Maths.Geometry
+namespace Tools.Math.Geometry
 {
     /// <summary>
     /// Represents a polygon in two dimensional space. 
@@ -295,19 +295,19 @@ namespace Tools.Maths.Geometry
             // Get the angle between the point and the
             // first and last vertices.
             int max_point = this._points.Count - 1;
-            double total_angle = CSharpMaths.GetAngle(this._points[max_point], point, this._points[0]);
+            double total_angle = SharpMath.GetAngle(this._points[max_point], point, this._points[0]);
 
             // Add the angles from the point
             // to each other pair of vertices.
             for (int i = 0; i < max_point; i++)
             {
-                total_angle += CSharpMaths.GetAngle(this._points[i], point, this._points[i + 1]);
+                total_angle += SharpMath.GetAngle(this._points[i], point, this._points[i + 1]);
             }
 
             // The total angle should be 2 * PI or -2 * PI if
             // the point is in the polygon and close to zero
             // if the point is outside the polygon.
-            return (Math.Abs(total_angle) > 0.000001);
+            return (System.Math.Abs(total_angle) > 0.000001);
         }
 
         #endregion Methods
@@ -356,9 +356,9 @@ namespace Tools.Maths.Geometry
         {
             float d1 = interval.min - this.max;
             float d2 = this.min - interval.max;
-            float sign = (this.min < interval.min) ? d1 / Math.Abs(d1) : d2 / Math.Abs(d2);
+            float sign = (this.min < interval.min) ? d1 / System.Math.Abs(d1) : d2 / System.Math.Abs(d2);
 
-            return sign * Math.Min(Math.Abs(d1), Math.Abs(d2));
+            return sign * System.Math.Min(System.Math.Abs(d1), System.Math.Abs(d2));
         }
 
         /// <summary>

@@ -2,12 +2,13 @@
 using System.Diagnostics;
 using System.Drawing;
 
-namespace Tools.Maths.Matrix
+namespace Tools.Math.Matrix
 {
     /// <summary>
     /// Represents a matrix (two dimensional array) and offers matrix transformation methods. 
     /// </summary>
     [DebuggerDisplay("Rows: {Rows}, Columns: {Columns}, matrix: {matrix}")]
+    [Obsolete("Use .Net native Matrix class instead.")]
     public class csMatrix
     {
         /*****************************************************************/
@@ -81,15 +82,15 @@ namespace Tools.Maths.Matrix
         /// <returns></returns>
         public csMatrix GetRotated(double angle)
         {
-            angle = angle % CSharpMaths.DEG_CIRCLE;
+            angle = angle % SharpMath.DEG_CIRCLE;
 
             if (angle < 0)
-                angle = CSharpMaths.DEG_CIRCLE + angle;
+                angle = SharpMath.DEG_CIRCLE + angle;
 
-            angle = angle * CSharpMaths.DEG_TO_RAD;
+            angle = angle * SharpMath.DEG_TO_RAD;
 
-            double cos = Math.Cos(angle);
-            double sin = Math.Sin(angle);
+            double cos = System.Math.Cos(angle);
+            double sin = System.Math.Sin(angle);
 
             double[,] mxResult = new double[this.Rows, this.Columns];
             double[,] mxVertex = new double[3, 1];

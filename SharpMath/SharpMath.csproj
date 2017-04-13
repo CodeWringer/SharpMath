@@ -7,8 +7,8 @@
     <ProjectGuid>{E3FA0659-22C1-4392-AAA8-10202EC13A44}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tools.Maths</RootNamespace>
-    <AssemblyName>CSharpMaths</AssemblyName>
+    <RootNamespace>Tools.Math</RootNamespace>
+    <AssemblyName>SharpMath</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -81,7 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\CSharpMaths.cs" />
+    <Compile Include="src\SharpMath.cs" />
     <Compile Include="src\csMatrix.cs" />
     <Compile Include="src\PointD.cs" />
     <Compile Include="src\Polygon2D.cs" />

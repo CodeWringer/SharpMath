@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Diagnostics;
 
-namespace Tools.Maths.Geometry
+namespace Tools.Math.Geometry
 {
     /// <summary>
     /// Represents a vector with a direction (angle). 
@@ -55,7 +55,7 @@ namespace Tools.Maths.Geometry
             get { return this._dRotation; }
             set
             {
-                this._dRotation = CSharpMaths.GetAngleClamped(value);
+                this._dRotation = SharpMath.GetAngleClamped(value);
 
                 if (this._dRotation > this.dMaximum)
                     this._dRotation = this.dMaximum;
@@ -73,7 +73,7 @@ namespace Tools.Maths.Geometry
         public double dMinimum
         {
             get { return this._dMinimum; }
-            set { this._dMinimum = CSharpMaths.GetAngleClamped(value); }
+            set { this._dMinimum = SharpMath.GetAngleClamped(value); }
         }
 
         private double _dMaximum;
@@ -83,7 +83,7 @@ namespace Tools.Maths.Geometry
         public double dMaximum
         {
             get { return this._dMaximum; }
-            set { this._dMaximum = CSharpMaths.GetAngleClamped(value); }
+            set { this._dMaximum = SharpMath.GetAngleClamped(value); }
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Tools.Maths.Geometry
         /// Creates a new angled vector, with default values. 
         /// </summary>
         public VectorAngled2D()
-            : this(0, CSharpMaths.DEG_CIRCLE, 1, new PointF())
+            : this(0, SharpMath.DEG_CIRCLE, 1, new PointF())
         {
         }
 
@@ -149,10 +149,10 @@ namespace Tools.Maths.Geometry
                 dMinimum = 0;
 
             //if (dMaximum > csMaths.DEG_CIRCLE)
-                dMaximum = CSharpMaths.DEG_CIRCLE;
+                dMaximum = SharpMath.DEG_CIRCLE;
 
-            this.dMinimum = CSharpMaths.GetAngleClamped(dMinimum);
-            this.dMaximum = CSharpMaths.GetAngleClamped(dMaximum);
+            this.dMinimum = SharpMath.GetAngleClamped(dMinimum);
+            this.dMaximum = SharpMath.GetAngleClamped(dMaximum);
             this.dRotation = dAngle;
         }
 
@@ -162,7 +162,7 @@ namespace Tools.Maths.Geometry
         /// <param name="dLength"></param>
         /// <param name="pntOrigin"></param>
         public VectorAngled2D(double dLength, PointF pntOrigin)
-            : this(0, CSharpMaths.DEG_CIRCLE, dLength, pntOrigin)
+            : this(0, SharpMath.DEG_CIRCLE, dLength, pntOrigin)
         {
         }
 
